@@ -20,12 +20,14 @@ public class CloudInventoryItem {
         return item;
     }
 
-    public void setName(String name) {
+    public CloudInventoryItem setName(String name) {
         this.name = name;
+        return this;
     }
 
-    public void setItem(ItemStack item) {
+    public CloudInventoryItem setItem(ItemStack item) {
         this.item = item;
+        return this;
     }
 
 }
