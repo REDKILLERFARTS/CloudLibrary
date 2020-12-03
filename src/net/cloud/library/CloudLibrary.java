@@ -1,8 +1,10 @@
 package net.cloud.library;
 
+import net.cloud.library.files.FileUtils;
 import net.cloud.library.inventories.CloudInventoryHolder;
 import net.cloud.library.inventories.click.CloudInventoryItemType;
-import net.cloud.library.inventories.interfaces.ExampleMenu;
+import net.cloud.library.inventories.interfaces.ConfigMenu;
+import net.cloud.library.support.ReflectionUtils;
 import net.cloud.library.support.ReflectionUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -16,11 +18,13 @@ public class CloudLibrary extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
+        library = this;
+        FileUtils.getInstance().init();
         ReflectionUtils.getUtils();
         getLogger().info("CloudLibrary - A library full of developer needs");
 
         for(Player player : Bukkit.getOnlinePlayers()) {
-            player.openInventory(new ExampleMenu().getInventory());
+            player.openInventory(new ConfigMenu().getInventory());
         }
 
         getServer().getPluginManager().registerEvents(this, this);
@@ -42,6 +46,11 @@ public class CloudLibrary extends JavaPlugin implements Listener {
                 type.onClick(player, inventory, event.getSlot());
             }
         }
+    }
+
+    private static CloudLibrary library;
+    public static CloudLibrary getLibrary() {
+        return library;
     }
 
 }
