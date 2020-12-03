@@ -1,6 +1,6 @@
 package net.cloud.library.inventories;
 
-import net.cloud.library.inventories.enums.CloudInventoryItemType;
+import net.cloud.library.inventories.click.CloudInventoryItemType;
 import org.bukkit.inventory.ItemStack;
 
 public class CloudInventoryItem {

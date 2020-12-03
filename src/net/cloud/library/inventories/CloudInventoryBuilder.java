@@ -1,8 +1,10 @@
 package net.cloud.library.inventories;
 
+import net.cloud.library.support.ReflectionUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import sun.reflect.Reflection;
 
 import java.util.Map;
 
@@ -14,7 +16,7 @@ public abstract class CloudInventoryBuilder {
     public abstract Map<Integer, CloudInventoryItem> getItems();
 
     public Inventory getInventory() {
-        Inventory inventory = Bukkit.createInventory(new CloudInventoryHolder(this), getSize(), getTitle());
+        Inventory inventory = Bukkit.createInventory(new CloudInventoryHolder(this), getSize(), ReflectionUtils.getUtils().getColor(getTitle()));
 
         Map<Integer, CloudInventoryItem> items = getItems();
         for (Integer slot : items.keySet()) {
