@@ -1,18 +1,22 @@
 package net.cloud.library;
 
+import net.cloud.library.files.FileManager;
 import net.cloud.library.files.FileUtils;
 import net.cloud.library.inventories.CloudInventoryHolder;
 import net.cloud.library.inventories.click.CloudInventoryItemType;
 import net.cloud.library.inventories.interfaces.ConfigMenu;
 import net.cloud.library.support.ReflectionUtils;
-import net.cloud.library.support.ReflectionUtils;
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.io.File;
 
 public class CloudLibrary extends JavaPlugin implements Listener {
 
@@ -45,6 +49,22 @@ public class CloudLibrary extends JavaPlugin implements Listener {
 
                 type.onClick(player, inventory, event.getSlot());
             }
+        }
+    }
+
+    @EventHandler
+    public void onClose(InventoryCloseEvent event) {
+        Inventory inventory = (Inventory) event.getInventory();
+        if(inventory.getHolder() instanceof CloudInventoryHolder) {
+            CloudInventoryHolder holder = (CloudInventoryHolder) event.getInventory().getHolder();
+            if(holder.getCloseInventoryBuilder() == null) return;
+
+            Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
+                @Override
+                public void run() {
+                    event.getPlayer().openInventory(holder.getCloseInventoryBuilder().getInventory());
+                }
+            }, 2L);
         }
     }
 

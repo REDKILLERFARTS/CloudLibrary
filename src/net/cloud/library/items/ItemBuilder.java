@@ -62,6 +62,23 @@ public class ItemBuilder {
         return this;
     }
 
+    public ItemBuilder setFlagsHidden(boolean flagsHidden) {
+        ItemMeta itemMeta = item.getItemMeta();
+        if(flagsHidden) {
+            for(ItemFlag flag : ItemFlag.values()) {
+                itemMeta.addItemFlags(flag);
+            }
+        } else {
+            for(ItemFlag flag : ItemFlag.values()) {
+                try {
+                    itemMeta.removeItemFlags(flag);
+                } catch(Exception e) {  continue;   }
+            }
+        }
+        item.setItemMeta(itemMeta);
+        return this;
+    }
+
     public ItemStack getItem() {
         return item;
     }

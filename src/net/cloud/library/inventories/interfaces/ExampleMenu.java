@@ -1,6 +1,7 @@
 package net.cloud.library.inventories.interfaces;
 
 import net.cloud.library.inventories.CloudInventoryBuilder;
+import net.cloud.library.inventories.CloudInventoryHolder;
 import net.cloud.library.inventories.CloudInventoryItem;
 import net.cloud.library.inventories.click.CloudInventoryItemType;
 import net.cloud.library.items.ItemBuilder;
@@ -14,6 +15,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ExampleMenu extends CloudInventoryBuilder {
+
+    @Override
+    public CloudInventoryHolder getInventoryHolder() {
+        return new CloudInventoryHolder(this, new ConfigMenu());
+    }
 
     @Override
     public String getName() {
@@ -35,28 +41,23 @@ public class ExampleMenu extends CloudInventoryBuilder {
         Map<Integer, CloudInventoryItem> items = new HashMap<>();
 
         ItemBuilder item = new ItemBuilder(XMaterial.matchXMaterial("STAINED_GLASS_PANE:15").get().parseItem(), 1)
-                .setName("&4&l[!] &eDisplay Item")
-                .setLore(Arrays.asList("Test", "Test2", "&cTest3"))
-                .setEnchanted(true);
+                .setName(" ")
+                .setLore(Arrays.asList(" "))
+                .setEnchanted(false)
+                .setFlagsHidden(true);
 
         CloudInventoryItem border = new CloudInventoryItem("Border", item.getItem(), new CloudInventoryItemType() {
             @Override
             public void onClick(Player player, Inventory inventory, Integer slot) {
                 player.sendMessage(ReflectionUtils.getUtils().getColor("&6&l[!] &eYou have clicked the &a" + slot + " &eslot."));
+                player.openInventory(new ConfigMenu().getInventory());
             }
         });
 
         for(int i=0; i < getSize(); i++) {
             items.put(i, border);
         }
-
-        CloudInventoryItem newBorder = new CloudInventoryItem("Border", XMaterial.matchXMaterial("STAINED_GLASS_PANE:5").get().parseItem(), new CloudInventoryItemType() {
-            @Override
-            public void onClick(Player player, Inventory inventory, Integer slot) {
-                player.sendMessage(ReflectionUtils.getUtils().getColor("&4&l[!] &cYou clicked the special slot. &8(&7" + slot + "&8)"));
-            }
-        });
-        items.put(0, newBorder);
         return items;
     }
+
 }

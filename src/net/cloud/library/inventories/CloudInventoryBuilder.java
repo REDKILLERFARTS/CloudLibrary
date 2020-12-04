@@ -10,13 +10,14 @@ import java.util.Map;
 
 public abstract class CloudInventoryBuilder {
 
+    public abstract CloudInventoryHolder getInventoryHolder();
     public abstract String getName();
     public abstract String getTitle();
     public abstract Integer getSize();
     public abstract Map<Integer, CloudInventoryItem> getItems();
 
     public Inventory getInventory() {
-        Inventory inventory = Bukkit.createInventory(new CloudInventoryHolder(this), getSize(), ReflectionUtils.getUtils().getColor(getTitle()));
+        Inventory inventory = Bukkit.createInventory(getInventoryHolder(), getSize(), ReflectionUtils.getUtils().getColor(getTitle()));
 
         Map<Integer, CloudInventoryItem> items = getItems();
         for (Integer slot : items.keySet()) {
