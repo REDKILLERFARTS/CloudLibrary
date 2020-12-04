@@ -31,4 +31,7 @@ Inventories:
             - ' '
             - '&7&o(( &f&oTip: &7&oClick to access regular tags. ))'
             - ' '
+        Click-Events:
+          Type: "OPEN"
+          GUI: "Default"
         Slots: 13

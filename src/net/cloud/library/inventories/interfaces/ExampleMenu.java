@@ -4,6 +4,7 @@ import net.cloud.library.inventories.CloudInventoryBuilder;
 import net.cloud.library.inventories.CloudInventoryHolder;
 import net.cloud.library.inventories.CloudInventoryItem;
 import net.cloud.library.inventories.click.CloudInventoryItemType;
+import net.cloud.library.inventories.data.GUIStorage;
 import net.cloud.library.items.ItemBuilder;
 import net.cloud.library.support.ReflectionUtils;
 import net.cloud.library.support.XMaterial;
@@ -18,7 +19,7 @@ public class ExampleMenu extends CloudInventoryBuilder {
 
     @Override
     public CloudInventoryHolder getInventoryHolder() {
-        return new CloudInventoryHolder(this, new ConfigMenu());
+        return new CloudInventoryHolder(this, new ConfigMenu("Default"));
     }
 
     @Override
@@ -50,7 +51,6 @@ public class ExampleMenu extends CloudInventoryBuilder {
             @Override
             public void onClick(Player player, Inventory inventory, Integer slot) {
                 player.sendMessage(ReflectionUtils.getUtils().getColor("&6&l[!] &eYou have clicked the &a" + slot + " &eslot."));
-                player.openInventory(new ConfigMenu().getInventory());
             }
         });
 

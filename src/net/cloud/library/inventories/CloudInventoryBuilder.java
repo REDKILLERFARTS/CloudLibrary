@@ -2,9 +2,8 @@ package net.cloud.library.inventories;
 
 import net.cloud.library.support.ReflectionUtils;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
-import sun.reflect.Reflection;
 
 import java.util.Map;
 
@@ -25,5 +24,14 @@ public abstract class CloudInventoryBuilder {
         }
 
         return inventory;
+    }
+
+    public void openInventory(Player player) {
+        if((!(player.getOpenInventory().getTopInventory() == null)) && (player.getOpenInventory().getTopInventory().getHolder() instanceof CloudInventoryHolder)) {
+            CloudInventoryHolder holder = (CloudInventoryHolder) player.getOpenInventory().getTopInventory().getHolder();
+            holder.setOpeningNew(true);
+        }
+
+        player.openInventory(getInventory());
     }
 }

@@ -8,6 +8,8 @@ public class CloudInventoryHolder implements InventoryHolder {
     private CloudInventoryBuilder builder;
     private CloudInventoryBuilder closeInventory;
 
+    private boolean openingNew = false;
+
     public CloudInventoryHolder(CloudInventoryBuilder builder) {
         setBuilder(builder);
     }
@@ -28,6 +30,14 @@ public class CloudInventoryHolder implements InventoryHolder {
     }
     public void setCloseInventory(CloudInventoryBuilder closeInventory) {
         this.closeInventory = closeInventory;
+    }
+
+    public void setOpeningNew(boolean opening) {
+        openingNew = opening;
+    }
+
+    public boolean getOpeningNew() {
+        return openingNew;
     }
 
     @Override
