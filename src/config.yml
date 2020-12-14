@@ -1,0 +1,37 @@
+Inventories:
+  Default:
+    Settings:
+      Title: "&lDEFAULT INVENTORY"
+      Size:  27
+    Close-Settings:
+      Open-Inventory: false
+      Inventory-Name: "none"
+    Items:
+      "Border":
+        Display-Item:
+          Enchanted: true
+          Show-Item-Flags: false
+          Material: STAINED_GLASS_PANE:15
+          Name: " "
+          Lore:
+            - " "
+        Slots:
+          - 0-27
+      "Center":
+        Display-Item:
+          Enchanted: true
+          Show-Item-Flags: false
+          Material: "EMPTY_MAP:0"
+          Name: "&6&l[!] &6Regular &eTags &8(&7Click&8)"
+          Lore:
+            - '&7&o"Click this to view regular tags."'
+            - ' '
+            - '&6&l[!] &eSection Information'
+            - ' &6- &e[Info] &fTags that are always available'
+            - ' '
+            - '&7&o(( &f&oTip: &7&oClick to access regular tags. ))'
+            - ' '
+        Click-Events:
+          Type: "OPEN"
+          GUI: "Default"
+        Slots: 13
