@@ -1,11 +1,10 @@
 package net.cloud.library;
 
+import net.cloud.library.commands.examples.ExampleCommand;
 import net.cloud.library.files.FileUtils;
 import net.cloud.library.inventories.data.GUIStorage;
 import net.cloud.library.inventories.events.InventoryFunctions;
 import net.cloud.library.support.ReflectionUtils;
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class CloudLibrary extends JavaPlugin {
@@ -21,6 +20,8 @@ public class CloudLibrary extends JavaPlugin {
 //        for (Player player : Bukkit.getOnlinePlayers()) {
 //            GUIStorage.getStorage().getFirstGUI().openInventory(player);
 //        }
+
+        new ExampleCommand().register();
 
         getServer().getPluginManager().registerEvents(new InventoryFunctions(), this);
     }
